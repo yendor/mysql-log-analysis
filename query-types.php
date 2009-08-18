@@ -58,6 +58,7 @@ function GetQueryType($line)
 		'INSERT INTO',
 		'DELETE',
 		'REPLACE',
+		'UPDATE',
 		'SET',
 		'DROP',
 		'GRANT',
