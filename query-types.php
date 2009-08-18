@@ -78,6 +78,7 @@ function GetQueryType($line)
 		'SHOW VARIABLES',
 		'CREATE ALGORITHM',
 		'ALTER TABLE',
+		'INSERT IGNORE INTO',
 	);
 
 	foreach ($starts as $start) {
