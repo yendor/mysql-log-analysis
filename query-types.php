@@ -1,7 +1,5 @@
 <?php
 
-define('LOGFILE', '/Applications/MAMP/logs/mysql.log.0.gz');
-
 if (empty($_SERVER['argv'][1]) || !is_file($_SERVER['argv'][1])) {
 	trigger_error("The first argument must be the name of a file", E_USER_ERROR);
 }
@@ -79,6 +77,11 @@ function GetQueryType($line)
 		'CREATE ALGORITHM',
 		'ALTER TABLE',
 		'INSERT IGNORE INTO',
+		'START TRANSACTION',
+		'COMMIT',
+		'ROLLBACK',
+		'SHOW PROCESSLIST',
+		'SHOW SLAVE STATUS',
 	);
 
 	foreach ($starts as $start) {
