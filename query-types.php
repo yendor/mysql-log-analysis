@@ -89,7 +89,14 @@ function GetQueryType($line)
 		'SHOW STATUS',
 		'SHOW INNODB STATUS',
 		'BEGIN',
-		'SHOW CREATE DATABASE'
+		'SHOW CREATE DATABASE',
+		'SHOW CHARACTER SET',
+		'SHOW MASTER LOGS',
+		'SHOW COLLATION',
+		'SHOW GRANTS',
+		'SHOW FULL FIELDS FROM',
+		'SHOW WARNINGS',
+		'SHOW FULL COLUMNS',
 	);
 
 	foreach ($starts as $start) {
