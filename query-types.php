@@ -32,7 +32,6 @@ while (!feof($fp)) {
 
 		$type = GetQueryType($matches[2]);
 
-
 		if (!isset($stats[$dbname][$type])) {
 			$stats[$dbname][$type] = 0;
 		}
@@ -44,12 +43,16 @@ while (!feof($fp)) {
 
 function GetQueryType($line)
 {
-	$line = trim($line);
-	$line = strtoupper($line);
+	$cleanLine = trim($line);
+	$cleanLine = strtoupper($cleanLine);
 
-	if (preg_match('#^/\*\!\d+\s+#', $line)) {
-		$line = preg_replace('#^/\*\!\d+\s+#', '', $line);
+	if (preg_match('#/\*\!\d+\s+#', $cleanLine)) {
+		$cleanLine = preg_replace('#/\*\!\d+\s+.*?\*/#', '', $cleanLine);
 	}
+
+	$cleanLine = preg_replace('#^[^\w]+#', '', $cleanLine);
+
+	$cleanLine = preg_replace('#\s+#', ' ', $cleanLine);
 
 	$starts = array(
 		'SELECT',
@@ -82,10 +85,15 @@ function GetQueryType($line)
 		'ROLLBACK',
 		'SHOW PROCESSLIST',
 		'SHOW SLAVE STATUS',
+		'SAVEPOINT',
+		'SHOW STATUS',
+		'SHOW INNODB STATUS',
+		'BEGIN',
+		'SHOW CREATE DATABASE'
 	);
 
 	foreach ($starts as $start) {
-		if (BeginsWith($start, $line)) {
+		if (BeginsWith($start, $cleanLine)) {
 			return $start;
 		}
 	}
